@@ -1,0 +1,2 @@
+# tk-fancon2
+pwm制御可能な4PinのFanをRaspberry pi picoを利用して制御するだけのいたってシンプルなやつ
