@@ -1,7 +1,0 @@
-# tk-fancon2
-pwm制御可能な4PinのFanをRaspberry pi picoを利用して制御するだけのいたってシンプルなやつ
-
-
-tinygoで書き直してみる・・・。
-そもそもClockDividerとか設定必要なんだろうか。
-一旦platform ioの設定とtinygoの設定が混在しているのでカオスだけれど、tinygoのビルドコマンドで一応ビルドはできる。
