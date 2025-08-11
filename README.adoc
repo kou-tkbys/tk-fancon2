@@ -1,7 +1,6 @@
 :toc:
 :toc-title: 目次
 = Raspberry Pi Picoで動かす！二重反転ファンコントローラー
-:stem: latexmath
 
 == 主な特徴
 * ポテンショメータによるファンの無段階速度調整
@@ -28,31 +27,11 @@ MIT License
 
 .PWM周波数を求める数式
 ****
-[stem]
-++++
-\begin{align*}
-f_{\mathrm{PWM}} &= \frac{f_{\mathrm{sysclk}}}{\mathrm{clkdiv} \times (\mathrm{wrap} + 1)} \\
-\\
-\text{ここで、}& \\
-f_{\mathrm{PWM}}   &\quad \text{この式で求めるPWM周波数 (Hz)} \\
-f_{\mathrm{sysclk}} &\quad \text{システムクロック周波数 (Picoなら125MHz)} \\
-\mathrm{clkdiv}  &\quad \text{クロック分周比} \\
-\mathrm{wrap}    &\quad \text{PWMカウンターのラップ値（デューティ比の最大値になる）} \\
-\end{align*}
-++++
+image::./doc/images/mf1.svg["PWM周波数を求める数式",align="center"]
 ****
 . picoのデフォルト周波数を利用した場合
 +
-[stem]
-++++
-\begin{align*}
-& f_{\mathrm{sysclk}} \quad \text{125,000,000Hz(Pico default 125MHz)} \\
-& \mathrm{clkdiv}  \quad \text{1(デフォルトのため分周しない)} \\
-& \mathrm{wrap}    \quad \text{65535(Pico default)} \\
-\\
-& f_{\mathrm{PWM}}  = \frac{125,000,000}{1 \times (65535 + 1)} \approx 1907 \, \text{Hz}
-\end{align*}
-++++
+image::./doc/images/mf2.svg["PICOデフォルト周波数から計算",align="center"]
 +
 結果より、picoでデフォルトのまま利用すると約1.9kHzぐらいのPWM周波数となり、モーター制御はできるかもしれないが、推奨範囲外のため、最適な選択とは言えない。
 
@@ -66,19 +45,11 @@ pwm.Configure(machine.PWMConfig{Period: 40000})
 +
 PWMConfigに対して周期をナノ秒で指定している。指定した値は以下によって算出している
 +
-.25kHzの周期計算
+.25kHzの周期ナノ秒を算出
 +
-[stem]
-++++
-\begin{align*}
-\text{Period (T)} &= \frac{1}{\text{Frequency (f)}} \\
-&= \frac{1}{25,000 \, \mathrm{Hz}} \\
-&= 0.00004 \, \mathrm{s} \\
-&= 40,000 \, \mathrm{ns}
-\end{align*}
-++++
+image::./doc/images/mf3.svg["周期（ナノ秒換算）",align="center"]
 +
-tinygoを利用すると極めてシンプルに設定可能だ。
+このように、tinygoを利用すると極めてシンプルに設定可能だ。
 
 .. c++
 +
@@ -95,30 +66,16 @@ c++で実装したときは、クロック分周を指定する必要があっ�
 
 .周波数を求める式を変形して分周を求める
 ****
-[stem]
-++++
-\mathrm{clkdiv} = \frac{f_{\mathrm{sysclk}}} {f_{\mathrm{PWM}} \times \text{wrap}}
-++++
+image::./doc/images/mf4.svg["分周換算",align="center"]
 ****
 +
 この変換式を利用して実際の値からクロック分周比を求める。
 +
-[stem]
-++++
-\begin{align*}
-& f_{\mathrm{PWM}} \quad \text{25,000(25kHz,目標周波数)} \\
-& f_{\mathrm{sysclk}} \quad \text{125,000,000Hz(Pico default 125MHz)} \\
-& \mathrm{wrap}    \quad \text{4096(自分で決めた値)} \\
-\\
-\mathrm{clkdiv} &= \frac{125,000,000}{25,000 \times 4096} \\
-&= \frac{125,000,000}{102,400,000} \\
-&= 1.220703125
-\end{align*}
-++++
+image::./doc/images/mf5.svg["分周算出",align="center"]
 +
 求めた値を実際に先のプログラムのように設定することで、25kHz周波数のPWM信号としていた。
 
-=== 利用するぽテンションメーターについて
+=== 利用するポテンションメーターについて
 * 抵抗値が低すぎる場合
 +
 無駄な電流が流れ、ポテンションメーターが熱くなる。また、Picoに無駄な負担をかける。
