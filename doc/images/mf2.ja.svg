@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<svg xmlns="http://www.w3.org/2000/svg" width="372.208px" height="136.528px" viewBox="0 -4021.5 20564.4 7543"
+<svg xmlns="http://www.w3.org/2000/svg" width="355.160px" height="136.528px" viewBox="0 -4021.5 19622.4 7543"
     xmlns:xlink="http://www.w3.org/1999/xlink" style="">
     <defs>
         <path id="MJX-6-NCM-I-1D453"
@@ -35,7 +35,6 @@
         <path id="MJX-6-NCM-N-30"
             d="M249-22C390-22 460 92 460 320C460 473 428 575 365 625C330 652 291 666 250 666C109 666 39 551 39 320C39 136 88-22 249-22M361 524C368 489 371 425 371 332C371 240 367 172 360 128C347 48 310 8 249 8C226 8 203 17 182 34C155 57 139 104 132 176C129 201 128 253 128 332C128 419 131 480 136 513C145 568 163 603 191 618C213 630 232 636 249 636C314 636 350 583 361 524Z">
         </path>
-        <path id="MJX-6-NCM-N-20" d=""></path>
         <path id="MJX-6-NCM-N-48"
             d="M566 3C640 3 690 2 716 0L716 39L688 39C653 39 632 41 625 46C618 51 614 63 614 81L614 602C614 620 618 631 625 636C632 641 653 644 688 644L716 644L716 683C690 681 640 680 567 680C492 680 442 681 417 683L417 644L444 644C479 644 500 641 507 636C514 631 518 620 518 602L518 375L231 375L231 602C231 620 235 631 242 636C249 641 270 644 305 644L332 644L332 683C307 681 257 680 183 680C109 680 59 681 33 683L33 644L61 644C96 644 117 641 124 636C131 631 135 620 135 602L135 81C135 63 131 51 124 46C117 41 96 39 61 39L33 39L33 0C59 2 109 3 182 3C257 3 307 2 332 0L332 39L305 39C270 39 249 41 242 46C235 51 231 63 231 81L231 336L518 336L518 81C518 63 514 51 507 46C500 41 479 39 444 39L417 39L417 0C442 2 492 3 566 3Z">
         </path>
@@ -54,6 +53,7 @@
         <path id="MJX-6-NCM-N-6F"
             d="M249-11C311-11 363 11 406 55C449 99 471 152 471 214C471 277 450 332 408 378C366 424 313 448 250 448C187 448 135 424 92 378C49 332 28 277 28 214C28 152 49 99 92 55C135 11 188-11 249-11M250 21C202 21 166 42 141 85C125 113 117 159 117 222C117 283 125 327 140 355C164 398 200 419 249 419C296 419 332 398 357 357C374 329 382 284 382 222C382 106 348 21 250 21Z">
         </path>
+        <path id="MJX-6-NCM-N-20" d=""></path>
         <path id="MJX-6-NCM-N-64"
             d="M374-11L527 0L527 38C491 38 470 40 462 46C454 52 450 67 450 90L450 694L301 683L301 645C336 645 358 642 366 636C374 630 377 616 377 593L377 390C345 427 305 445 257 445C195 445 142 423 99 378C56 333 34 279 34 216C34 155 54 102 95 57C136 12 186-11 247-11C298-11 341 8 374 47M261 415C304 415 339 396 364 358C371 347 374 336 374 323L374 121C374 108 371 97 364 86C336 41 298 19 251 19C210 19 177 39 151 80C133 110 124 155 124 215C124 324 161 415 261 415Z">
         </path>
@@ -72,9 +72,6 @@
         <path id="MJX-6-NCM-N-74"
             d="M332 126L332 186L300 186L300 128C300 78 282 22 238 22C197 22 177 56 177 124L177 395L316 395L316 433L177 433L177 615L145 615C144 582 141 553 134 527C117 461 78 427 19 424L19 395L102 395L102 126C102 67 120 29 155 10C182-4 207-11 232-11C298-11 332 55 332 126Z">
         </path>
-        <path id="MJX-6-NCM-N-3A"
-            d="M192 375C192 405 169 431 139 431C109 431 86 405 86 375C86 345 109 319 139 319C169 319 192 345 192 375M192 56C192 86 169 112 139 112C109 112 86 86 86 56C86 26 109 0 139 0C169 0 192 26 192 56Z">
-        </path>
         <path id="MJX-6-NCM-N-4D"
             d="M175 108L175 622L407 24C413 8 421 0 430 0C439 0 446 7 452 21L689 630L689 81C689 63 685 51 678 46C671 41 650 39 615 39L587 39L587 0C614 2 663 3 733 3C803 3 852 2 879 0L879 39L851 39C816 39 795 41 788 46C781 51 777 63 777 81L777 602C777 620 781 631 788 636C795 641 816 644 851 644L879 644L879 683L708 683C681 683 679 682 671 662L458 115L247 659C238 679 235 683 208 683L37 683L37 644L65 644C100 644 121 641 128 636C135 631 139 620 139 602L139 108C139 91 135 77 127 64C116 47 86 39 37 39L37 0L157 3L277 0L277 39C204 39 175 51 175 108Z">
         </path>
@@ -83,12 +80,6 @@
         </path>
         <path id="MJX-6-NCM-N-76"
             d="M388 354C388 349 386 342 382 332L286 91L179 356C175 365 173 370 173 371C173 386 192 393 230 393L230 431L118 428C94 427 61 428 19 431L19 393C75 393 84 395 98 359L240 10C245-4 253-11 264-11C275-11 283-4 288 10L417 329C421 340 425 349 430 357C444 381 470 393 508 393L508 431C475 428 449 427 430 428L341 431L341 393C370 392 388 380 388 354Z">
-        </path>
-        <path id="MJX-6-NCM-N-44"
-            d="M401 0C490 0 563 34 622 103C679 168 707 246 707 336C707 428 679 508 624 575C565 647 490 683 401 683L35 683L35 644L63 644C98 644 119 641 126 636C133 631 137 620 137 602L137 81C137 63 133 51 126 46C119 41 98 39 63 39L35 39L35 0M374 39L274 39C235 39 230 38 230 74L230 609C230 645 235 644 274 644L373 644C447 644 506 614 550 554C583 507 600 435 600 336C600 161 534 39 374 39Z">
-        </path>
-        <path id="MJX-6-NCM-N-6E"
-            d="M314 413C359 413 382 378 382 307L382 79C382 60 379 48 372 44C365 40 343 38 306 38L306 0L421 3L535 0L535 38C503 38 482 39 472 42C462 45 458 52 458 64L458 251C458 298 457 331 454 350C444 411 399 442 320 442C257 442 210 412 179 352L179 442L32 431L32 393C68 393 90 390 98 384C106 378 109 365 109 342L109 79C109 60 105 48 98 44C91 40 69 38 32 38L32 0L147 3L261 0L261 38C224 38 203 40 196 44C189 48 185 60 185 79L185 259C185 340 236 413 314 413Z">
         </path>
         <path id="MJX-6-NCM-N-77"
             d="M620 332C634 371 662 392 703 393L703 431C672 428 646 427 627 428L531 431L531 393C569 392 588 377 588 349C588 345 587 339 584 330L497 89L403 353C400 362 399 367 399 370C399 385 418 393 457 393L457 431L350 428C330 427 299 428 258 431L258 393C293 393 314 388 321 379C324 376 332 359 343 328L262 102L172 354C169 363 167 368 167 370C167 385 187 393 226 393L226 431L114 428L18 431L18 393C67 393 80 394 91 361L216 13C222-3 230-11 240-11C251-11 259-4 264 11L360 279L457 10C462-4 470-11 481-11C488-10 496-3 504 10Z">
@@ -129,13 +120,13 @@
     </defs>
     <g fill="#888888" stroke="#888888" stroke-width="0" transform="scale(1,-1)">
         <g data-mml-node="math"
-            data-latex="\begin{align*} &amp; f_{\mathrm{sysclk}} \quad \text{125,000,000 Hz (Pico default: 125MHz)} \\ &amp; \mathrm{clkdiv}  \quad \text{1 (Default, no clock division)} \\ &amp; \mathrm{wrap}    \quad \text{65535 (Pico default)} \\ \\ &amp; f_{\mathrm{PWM}}  = \frac{125,000,000}{1 \times (65535 + 1)} \approx 1907 \, \text{Hz} \end{align*}"
+            data-latex="\begin{align*} &amp; f_{\mathrm{sysclk}} \quad \text{125,000,000Hz(Pico default 125MHz)} \\ &amp; \mathrm{clkdiv}  \quad \text{1(デフォルトのため分周しない)} \\ &amp; \mathrm{wrap}    \quad \text{65535(Pico default)} \\ \\ &amp; f_{\mathrm{PWM}}  = \frac{125,000,000}{1 \times (65535 + 1)} \approx 1907 \, \text{Hz} \end{align*}"
             data-semantic-structure="(62 (10 0 (9 (8 (3 1 2) 4 5))) (19 11 (18 (17 12 13 14))) (28 20 (27 (26 21 22 23))) (30 29) (61 31 (60 (59 (34 32 33) 35 (52 (41 36 37 38 39 40) (51 42 43 (50 44 (49 45 46 47) 48))) 53 (58 54 57 56)))))">
             <g data-mml-node="mtable" data-latex-item="{align*}"
-                data-latex="\begin{align*} &amp; f_{\mathrm{sysclk}} \quad \text{125,000,000 Hz (Pico default: 125MHz)} \\ &amp; \mathrm{clkdiv}  \quad \text{1 (Default, no clock division)} \\ &amp; \mathrm{wrap}    \quad \text{65535 (Pico default)} \\ \\ &amp; f_{\mathrm{PWM}}  = \frac{125,000,000}{1 \times (65535 + 1)} \approx 1907 \, \text{Hz} \end{align*}"
+                data-latex="\begin{align*} &amp; f_{\mathrm{sysclk}} \quad \text{125,000,000Hz(Pico default 125MHz)} \\ &amp; \mathrm{clkdiv}  \quad \text{1(デフォルトのため分周しない)} \\ &amp; \mathrm{wrap}    \quad \text{65535(Pico default)} \\ \\ &amp; f_{\mathrm{PWM}}  = \frac{125,000,000}{1 \times (65535 + 1)} \approx 1907 \, \text{Hz} \end{align*}"
                 data-semantic-type="table" data-semantic-role="unknown" data-semantic-annotation="depth:1"
                 data-semantic-id="62" data-semantic-children="10,19,28,30,61"
-                data-semantic-attributes="latex:\begin{align*} &amp; f_{\mathrm{sysclk}} \quad \text{125,000,000 Hz (Pico default: 125MHz)} \\ &amp; \mathrm{clkdiv}  \quad \text{1 (Default, no clock division)} \\ &amp; \mathrm{wrap}    \quad \text{65535 (Pico default)} \\ \\ &amp; f_{\mathrm{PWM}}  = \frac{125,000,000}{1 \times (65535 + 1)} \approx 1907 \, \text{Hz} \end{align*}"
+                data-semantic-attributes="latex:\begin{align*} &amp; f_{\mathrm{sysclk}} \quad \text{125,000,000Hz(Pico default 125MHz)} \\ &amp; \mathrm{clkdiv}  \quad \text{1(デフォルトのため分周しない)} \\ &amp; \mathrm{wrap}    \quad \text{65535(Pico default)} \\ \\ &amp; f_{\mathrm{PWM}}  = \frac{125,000,000}{1 \times (65535 + 1)} \approx 1907 \, \text{Hz} \end{align*}"
                 data-semantic-owns="10 19 28 30 61" aria-level="0" data-speech-node="true">
                 <g data-mml-node="mtr" data-semantic-type="row" data-semantic-role="table"
                     data-semantic-annotation="depth:2" data-semantic-id="10" data-semantic-children="0,9"
@@ -192,11 +183,11 @@
                                 data-semantic-annotation="clearspeak:unit;nemeth:number;depth:5" data-semantic-id="4"
                                 data-semantic-parent="8" data-semantic-attributes="latex:\quad" aria-level="4"
                                 data-speech-node="true" transform="translate(2387.4,0)"></g>
-                            <g data-mml-node="mtext" data-latex="\text{125,000,000 Hz (Pico default: 125MHz)}"
+                            <g data-mml-node="mtext" data-latex="\text{125,000,000Hz(Pico default 125MHz)}"
                                 data-semantic-type="text" data-semantic-role="text" data-semantic-font="normal"
                                 data-semantic-annotation="clearspeak:unit;nemeth:number;depth:5" data-semantic-id="5"
                                 data-semantic-parent="8"
-                                data-semantic-attributes="latex:\text{125,000,000 Hz (Pico default: 125MHz)}"
+                                data-semantic-attributes="latex:\text{125,000,000Hz(Pico default 125MHz)}"
                                 aria-level="4" data-speech-node="true" transform="translate(3387.4,0)">
                                 <use data-c="31" xlink:href="#MJX-6-NCM-N-31"></use>
                                 <use data-c="32" xlink:href="#MJX-6-NCM-N-32" transform="translate(500,0)"></use>
@@ -209,32 +200,29 @@
                                 <use data-c="30" xlink:href="#MJX-6-NCM-N-30" transform="translate(3556,0)"></use>
                                 <use data-c="30" xlink:href="#MJX-6-NCM-N-30" transform="translate(4056,0)"></use>
                                 <use data-c="30" xlink:href="#MJX-6-NCM-N-30" transform="translate(4556,0)"></use>
-                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(5056,0)"></use>
-                                <use data-c="48" xlink:href="#MJX-6-NCM-N-48" transform="translate(5388,0)"></use>
-                                <use data-c="7A" xlink:href="#MJX-6-NCM-N-7A" transform="translate(6138,0)"></use>
-                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(6582,0)"></use>
-                                <use data-c="28" xlink:href="#MJX-6-NCM-N-28" transform="translate(6914,0)"></use>
-                                <use data-c="50" xlink:href="#MJX-6-NCM-N-50" transform="translate(7303,0)"></use>
-                                <use data-c="69" xlink:href="#MJX-6-NCM-N-69" transform="translate(7984,0)"></use>
-                                <use data-c="63" xlink:href="#MJX-6-NCM-N-63" transform="translate(8262,0)"></use>
-                                <use data-c="6F" xlink:href="#MJX-6-NCM-N-6F" transform="translate(8706,0)"></use>
-                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(9206,0)"></use>
-                                <use data-c="64" xlink:href="#MJX-6-NCM-N-64" transform="translate(9538,0)"></use>
-                                <use data-c="65" xlink:href="#MJX-6-NCM-N-65" transform="translate(10094,0)"></use>
-                                <use data-c="66" xlink:href="#MJX-6-NCM-N-66" transform="translate(10538,0)"></use>
-                                <use data-c="61" xlink:href="#MJX-6-NCM-N-61" transform="translate(10844,0)"></use>
-                                <use data-c="75" xlink:href="#MJX-6-NCM-N-75" transform="translate(11344,0)"></use>
-                                <use data-c="6C" xlink:href="#MJX-6-NCM-N-6C" transform="translate(11900,0)"></use>
-                                <use data-c="74" xlink:href="#MJX-6-NCM-N-74" transform="translate(12178,0)"></use>
-                                <use data-c="3A" xlink:href="#MJX-6-NCM-N-3A" transform="translate(12567,0)"></use>
-                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(12845,0)"></use>
-                                <use data-c="31" xlink:href="#MJX-6-NCM-N-31" transform="translate(13177,0)"></use>
-                                <use data-c="32" xlink:href="#MJX-6-NCM-N-32" transform="translate(13677,0)"></use>
-                                <use data-c="35" xlink:href="#MJX-6-NCM-N-35" transform="translate(14177,0)"></use>
-                                <use data-c="4D" xlink:href="#MJX-6-NCM-N-4D" transform="translate(14677,0)"></use>
-                                <use data-c="48" xlink:href="#MJX-6-NCM-N-48" transform="translate(15594,0)"></use>
-                                <use data-c="7A" xlink:href="#MJX-6-NCM-N-7A" transform="translate(16344,0)"></use>
-                                <use data-c="29" xlink:href="#MJX-6-NCM-N-29" transform="translate(16788,0)"></use>
+                                <use data-c="48" xlink:href="#MJX-6-NCM-N-48" transform="translate(5056,0)"></use>
+                                <use data-c="7A" xlink:href="#MJX-6-NCM-N-7A" transform="translate(5806,0)"></use>
+                                <use data-c="28" xlink:href="#MJX-6-NCM-N-28" transform="translate(6250,0)"></use>
+                                <use data-c="50" xlink:href="#MJX-6-NCM-N-50" transform="translate(6639,0)"></use>
+                                <use data-c="69" xlink:href="#MJX-6-NCM-N-69" transform="translate(7320,0)"></use>
+                                <use data-c="63" xlink:href="#MJX-6-NCM-N-63" transform="translate(7598,0)"></use>
+                                <use data-c="6F" xlink:href="#MJX-6-NCM-N-6F" transform="translate(8042,0)"></use>
+                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(8542,0)"></use>
+                                <use data-c="64" xlink:href="#MJX-6-NCM-N-64" transform="translate(8874,0)"></use>
+                                <use data-c="65" xlink:href="#MJX-6-NCM-N-65" transform="translate(9430,0)"></use>
+                                <use data-c="66" xlink:href="#MJX-6-NCM-N-66" transform="translate(9874,0)"></use>
+                                <use data-c="61" xlink:href="#MJX-6-NCM-N-61" transform="translate(10180,0)"></use>
+                                <use data-c="75" xlink:href="#MJX-6-NCM-N-75" transform="translate(10680,0)"></use>
+                                <use data-c="6C" xlink:href="#MJX-6-NCM-N-6C" transform="translate(11236,0)"></use>
+                                <use data-c="74" xlink:href="#MJX-6-NCM-N-74" transform="translate(11514,0)"></use>
+                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(11903,0)"></use>
+                                <use data-c="31" xlink:href="#MJX-6-NCM-N-31" transform="translate(12235,0)"></use>
+                                <use data-c="32" xlink:href="#MJX-6-NCM-N-32" transform="translate(12735,0)"></use>
+                                <use data-c="35" xlink:href="#MJX-6-NCM-N-35" transform="translate(13235,0)"></use>
+                                <use data-c="4D" xlink:href="#MJX-6-NCM-N-4D" transform="translate(13735,0)"></use>
+                                <use data-c="48" xlink:href="#MJX-6-NCM-N-48" transform="translate(14652,0)"></use>
+                                <use data-c="7A" xlink:href="#MJX-6-NCM-N-7A" transform="translate(15402,0)"></use>
+                                <use data-c="29" xlink:href="#MJX-6-NCM-N-29" transform="translate(15846,0)"></use>
                             </g>
                         </g>
                     </g>
@@ -273,42 +261,16 @@
                                 data-semantic-annotation="clearspeak:unit;nemeth:number;depth:5" data-semantic-id="13"
                                 data-semantic-parent="17" data-semantic-attributes="latex:\quad" aria-level="4"
                                 data-speech-node="true" transform="translate(2612,0)"></g>
-                            <g data-mml-node="mtext" data-latex="\text{1 (Default, no clock division)}"
-                                data-semantic-type="text" data-semantic-role="text" data-semantic-font="normal"
+                            <g data-mml-node="mtext" data-latex="\text{1(デフォルトのため分周しない)}" data-semantic-type="text"
+                                data-semantic-role="annotation" data-semantic-font="normal"
                                 data-semantic-annotation="clearspeak:unit;nemeth:number;depth:5" data-semantic-id="14"
-                                data-semantic-parent="17"
-                                data-semantic-attributes="latex:\text{1 (Default, no clock division)}" aria-level="4"
-                                data-speech-node="true" transform="translate(3612,0)">
+                                data-semantic-parent="17" data-semantic-attributes="latex:\text{1(デフォルトのため分周しない)}"
+                                aria-level="4" data-speech-node="true" transform="translate(3612,0)">
                                 <use data-c="31" xlink:href="#MJX-6-NCM-N-31"></use>
-                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(500,0)"></use>
-                                <use data-c="28" xlink:href="#MJX-6-NCM-N-28" transform="translate(832,0)"></use>
-                                <use data-c="44" xlink:href="#MJX-6-NCM-N-44" transform="translate(1221,0)"></use>
-                                <use data-c="65" xlink:href="#MJX-6-NCM-N-65" transform="translate(1985,0)"></use>
-                                <use data-c="66" xlink:href="#MJX-6-NCM-N-66" transform="translate(2429,0)"></use>
-                                <use data-c="61" xlink:href="#MJX-6-NCM-N-61" transform="translate(2735,0)"></use>
-                                <use data-c="75" xlink:href="#MJX-6-NCM-N-75" transform="translate(3235,0)"></use>
-                                <use data-c="6C" xlink:href="#MJX-6-NCM-N-6C" transform="translate(3791,0)"></use>
-                                <use data-c="74" xlink:href="#MJX-6-NCM-N-74" transform="translate(4069,0)"></use>
-                                <use data-c="2C" xlink:href="#MJX-6-NCM-N-2C" transform="translate(4458,0)"></use>
-                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(4736,0)"></use>
-                                <use data-c="6E" xlink:href="#MJX-6-NCM-N-6E" transform="translate(5068,0)"></use>
-                                <use data-c="6F" xlink:href="#MJX-6-NCM-N-6F" transform="translate(5624,0)"></use>
-                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(6124,0)"></use>
-                                <use data-c="63" xlink:href="#MJX-6-NCM-N-63" transform="translate(6456,0)"></use>
-                                <use data-c="6C" xlink:href="#MJX-6-NCM-N-6C" transform="translate(6900,0)"></use>
-                                <use data-c="6F" xlink:href="#MJX-6-NCM-N-6F" transform="translate(7178,0)"></use>
-                                <use data-c="63" xlink:href="#MJX-6-NCM-N-63" transform="translate(7678,0)"></use>
-                                <use data-c="6B" xlink:href="#MJX-6-NCM-N-6B" transform="translate(8122,0)"></use>
-                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(8650,0)"></use>
-                                <use data-c="64" xlink:href="#MJX-6-NCM-N-64" transform="translate(8982,0)"></use>
-                                <use data-c="69" xlink:href="#MJX-6-NCM-N-69" transform="translate(9538,0)"></use>
-                                <use data-c="76" xlink:href="#MJX-6-NCM-N-76" transform="translate(9816,0)"></use>
-                                <use data-c="69" xlink:href="#MJX-6-NCM-N-69" transform="translate(10344,0)"></use>
-                                <use data-c="73" xlink:href="#MJX-6-NCM-N-73" transform="translate(10622,0)"></use>
-                                <use data-c="69" xlink:href="#MJX-6-NCM-N-69" transform="translate(11016,0)"></use>
-                                <use data-c="6F" xlink:href="#MJX-6-NCM-N-6F" transform="translate(11294,0)"></use>
-                                <use data-c="6E" xlink:href="#MJX-6-NCM-N-6E" transform="translate(11794,0)"></use>
-                                <use data-c="29" xlink:href="#MJX-6-NCM-N-29" transform="translate(12350,0)"></use>
+                                <use data-c="28" xlink:href="#MJX-6-NCM-N-28" transform="translate(500,0)"></use><text
+                                    data-variant="normal" transform="translate(889,0) scale(1,-1)" font-size="884px"
+                                    font-family="serif">デフォルトのため分周しない</text>
+                                <use data-c="29" xlink:href="#MJX-6-NCM-N-29" transform="translate(13013.3,0)"></use>
                             </g>
                         </g>
                     </g>
@@ -345,31 +307,30 @@
                                 data-semantic-annotation="clearspeak:unit;nemeth:number;depth:5" data-semantic-id="22"
                                 data-semantic-parent="26" data-semantic-attributes="latex:\quad" aria-level="4"
                                 data-speech-node="true" transform="translate(2170,0)"></g>
-                            <g data-mml-node="mtext" data-latex="\text{65535 (Pico default)}" data-semantic-type="text"
+                            <g data-mml-node="mtext" data-latex="\text{65535(Pico default)}" data-semantic-type="text"
                                 data-semantic-role="text" data-semantic-font="normal"
                                 data-semantic-annotation="clearspeak:unit;nemeth:number;depth:5" data-semantic-id="23"
-                                data-semantic-parent="26" data-semantic-attributes="latex:\text{65535 (Pico default)}"
+                                data-semantic-parent="26" data-semantic-attributes="latex:\text{65535(Pico default)}"
                                 aria-level="4" data-speech-node="true" transform="translate(3170,0)">
                                 <use data-c="36" xlink:href="#MJX-6-NCM-N-36"></use>
                                 <use data-c="35" xlink:href="#MJX-6-NCM-N-35" transform="translate(500,0)"></use>
                                 <use data-c="35" xlink:href="#MJX-6-NCM-N-35" transform="translate(1000,0)"></use>
                                 <use data-c="33" xlink:href="#MJX-6-NCM-N-33" transform="translate(1500,0)"></use>
                                 <use data-c="35" xlink:href="#MJX-6-NCM-N-35" transform="translate(2000,0)"></use>
-                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(2500,0)"></use>
-                                <use data-c="28" xlink:href="#MJX-6-NCM-N-28" transform="translate(2832,0)"></use>
-                                <use data-c="50" xlink:href="#MJX-6-NCM-N-50" transform="translate(3221,0)"></use>
-                                <use data-c="69" xlink:href="#MJX-6-NCM-N-69" transform="translate(3902,0)"></use>
-                                <use data-c="63" xlink:href="#MJX-6-NCM-N-63" transform="translate(4180,0)"></use>
-                                <use data-c="6F" xlink:href="#MJX-6-NCM-N-6F" transform="translate(4624,0)"></use>
-                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(5124,0)"></use>
-                                <use data-c="64" xlink:href="#MJX-6-NCM-N-64" transform="translate(5456,0)"></use>
-                                <use data-c="65" xlink:href="#MJX-6-NCM-N-65" transform="translate(6012,0)"></use>
-                                <use data-c="66" xlink:href="#MJX-6-NCM-N-66" transform="translate(6456,0)"></use>
-                                <use data-c="61" xlink:href="#MJX-6-NCM-N-61" transform="translate(6762,0)"></use>
-                                <use data-c="75" xlink:href="#MJX-6-NCM-N-75" transform="translate(7262,0)"></use>
-                                <use data-c="6C" xlink:href="#MJX-6-NCM-N-6C" transform="translate(7818,0)"></use>
-                                <use data-c="74" xlink:href="#MJX-6-NCM-N-74" transform="translate(8096,0)"></use>
-                                <use data-c="29" xlink:href="#MJX-6-NCM-N-29" transform="translate(8485,0)"></use>
+                                <use data-c="28" xlink:href="#MJX-6-NCM-N-28" transform="translate(2500,0)"></use>
+                                <use data-c="50" xlink:href="#MJX-6-NCM-N-50" transform="translate(2889,0)"></use>
+                                <use data-c="69" xlink:href="#MJX-6-NCM-N-69" transform="translate(3570,0)"></use>
+                                <use data-c="63" xlink:href="#MJX-6-NCM-N-63" transform="translate(3848,0)"></use>
+                                <use data-c="6F" xlink:href="#MJX-6-NCM-N-6F" transform="translate(4292,0)"></use>
+                                <use data-c="20" xlink:href="#MJX-6-NCM-N-20" transform="translate(4792,0)"></use>
+                                <use data-c="64" xlink:href="#MJX-6-NCM-N-64" transform="translate(5124,0)"></use>
+                                <use data-c="65" xlink:href="#MJX-6-NCM-N-65" transform="translate(5680,0)"></use>
+                                <use data-c="66" xlink:href="#MJX-6-NCM-N-66" transform="translate(6124,0)"></use>
+                                <use data-c="61" xlink:href="#MJX-6-NCM-N-61" transform="translate(6430,0)"></use>
+                                <use data-c="75" xlink:href="#MJX-6-NCM-N-75" transform="translate(6930,0)"></use>
+                                <use data-c="6C" xlink:href="#MJX-6-NCM-N-6C" transform="translate(7486,0)"></use>
+                                <use data-c="74" xlink:href="#MJX-6-NCM-N-74" transform="translate(7764,0)"></use>
+                                <use data-c="29" xlink:href="#MJX-6-NCM-N-29" transform="translate(8153,0)"></use>
                             </g>
                         </g>
                     </g>

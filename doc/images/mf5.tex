@@ -1,12 +1,7 @@
-//
-// converted 
-// https://viereck.ch/latex-to-svg/
-//
-
 \begin{align*}
-& f_{\mathrm{PWM}} \quad \text{25,000(25kHz,目標周波数)} \\
-& f_{\mathrm{sysclk}} \quad \text{125,000,000Hz(Pico default 125MHz)} \\
-& \mathrm{wrap}    \quad \text{4096(自分で決めた値)} \\
+& f_{\mathrm{PWM}} \quad \text{25,000 (25kHz, Target Frequency)} \\
+& f_{\mathrm{sysclk}} \quad \text{125,000,000 Hz (Pico default: 125MHz)} \\
+& \mathrm{wrap}    \quad \text{4096 (User-defined value)} \\
 \\
 \mathrm{clkdiv} &= \frac{125,000,000}{25,000 \times 4096} \\
 &= \frac{125,000,000}{102,400,000} \\

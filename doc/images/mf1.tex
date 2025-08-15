@@ -1,14 +1,9 @@
-//
-// converted 
-// https://viereck.ch/latex-to-svg/
-//
-
 \begin{align*}
 f_{\mathrm{PWM}} &= \frac{f_{\mathrm{sysclk}}}{\mathrm{clkdiv} \times (\mathrm{wrap} + 1)} \\
 \\
-\text{ここで、}& \\
-f_{\mathrm{PWM}}   &\quad \text{この式で求めるPWM周波数 (Hz)} \\
-f_{\mathrm{sysclk}} &\quad \text{システムクロック周波数 (Picoなら125MHz)} \\
-\mathrm{clkdiv}  &\quad \text{クロック分周比} \\
-\mathrm{wrap}    &\quad \text{PWMカウンターのラップ値（デューティ比の最大値になる）} \\
+\text{Where:}& \\
+f_{\mathrm{PWM}}   &\quad \text{The PWM frequency calculated by this formula (Hz)} \\
+f_{\mathrm{sysclk}} &\quad \text{System clock frequency (e.g., 125MHz for Pico)} \\
+\mathrm{clkdiv}  &\quad \text{Clock divider ratio} \\
+\mathrm{wrap}    &\quad \text{PWM counter's wrap value (determines the maximum duty cycle)} \\
 \end{align*}
