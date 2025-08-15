@@ -7,18 +7,25 @@ import (
 	"sync/atomic"
 )
 
+// タコピンに必要な機能だけインターフェースで分離
+// TachoPin is an interface that extracts only the functions needed for a tacho pin.
+type TachoPin interface {
+	Configure(config machine.PinConfig)
+	SetInterrupt(trigger machine.PinChange, callback func(machine.Pin)) error
+}
+
 // Fan ファン単体の構造体
 // Fan represents a single fan unit.
 type Fan struct {
 	Name       string
-	tachoPin   machine.Pin
+	tachoPin   TachoPin
 	pulseCount atomic.Uint32
 	rpm        uint32
 }
 
 // NewFan nameは自由
 // NewFan creates a new Fan instance. The name can be any string.
-func NewFan(name string, pin machine.Pin) *Fan {
+func NewFan(name string, pin TachoPin) *Fan {
 	f := &Fan{
 		Name:     name,
 		tachoPin: pin,
@@ -33,7 +40,7 @@ func NewFan(name string, pin machine.Pin) *Fan {
 	//
 	// pinFallingを条件にパルスカウントアップ
 	// Increment the pulse count on each falling edge.
-	f.tachoPin.SetInterrupt(machine.PinFalling, func(p machine.Pin) {
+	_ = f.tachoPin.SetInterrupt(machine.PinFalling, func(p machine.Pin) {
 		f.pulseCount.Add(1)
 	})
 	return f

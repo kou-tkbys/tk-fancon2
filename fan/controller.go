@@ -1,3 +1,5 @@
+//go:build pico
+
 // fan/controller.go
 
 package fan

@@ -2,8 +2,6 @@
 
 package fan
 
-import "machine"
-
 // DualFan 二重反転ファン構造体
 // DualFan represents a dual contra-rotating fan unit.
 type DualFan struct {
@@ -18,7 +16,7 @@ type DualFan struct {
 
 // NewDualFan 二重反転ファン
 // NewDualFan creates a new DualFan instance.
-func NewDualFan(name string, pinFront, pinRear machine.Pin) *DualFan {
+func NewDualFan(name string, pinFront, pinRear TachoPin) *DualFan {
 	// Fan２つを内部にもつ
 	// It internally holds two Fan instances.
 	df := &DualFan{
