@@ -5,15 +5,22 @@ package fan
 import "machine"
 
 // DualFan 二重反転ファン構造体
+// DualFan represents a dual contra-rotating fan unit.
 type DualFan struct {
-	Name  string
-	Front *Fan // 前側のファン部品
-	Rear  *Fan // 後ろ側のファン部品
+	Name string
+	// 前側のファン部品
+	// The front fan component
+	Front *Fan
+	// 後ろ側のファン部品
+	// The rear fan component
+	Rear *Fan
 }
 
 // NewDualFan 二重反転ファン
+// NewDualFan creates a new DualFan instance.
 func NewDualFan(name string, pinFront, pinRear machine.Pin) *DualFan {
 	// Fan２つを内部にもつ
+	// It internally holds two Fan instances.
 	df := &DualFan{
 		Name:  name,
 		Front: NewFan(name+"-F", pinFront),
@@ -23,6 +30,7 @@ func NewDualFan(name string, pinFront, pinRear machine.Pin) *DualFan {
 }
 
 // CalculateRPMs 部品たちのRPMを一斉に計算して結果を取得する
+// CalculateRPMs calculates the RPM for both fan components at once and returns the results.
 func (df *DualFan) CalculateRPMs() (uint32, uint32) {
 	frontRpm := df.Front.CalculateRPM()
 	rearRpm := df.Rear.CalculateRPM()

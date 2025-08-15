@@ -1,3 +1,5 @@
+// fan/single.go
+
 package fan
 
 import (
@@ -6,6 +8,7 @@ import (
 )
 
 // Fan ファン単体の構造体
+// Fan represents a single fan unit.
 type Fan struct {
 	Name       string
 	tachoPin   machine.Pin
@@ -14,6 +17,7 @@ type Fan struct {
 }
 
 // NewFan nameは自由
+// NewFan creates a new Fan instance. The name can be any string.
 func NewFan(name string, pin machine.Pin) *Fan {
 	f := &Fan{
 		Name:     name,
@@ -21,19 +25,27 @@ func NewFan(name string, pin machine.Pin) *Fan {
 	}
 
 	// 回転数取得用のタコメータピン（タコピン）のプルアップ設定
+	// Configure the tacho pin (for RPM measurement) as an input with a pull-up resistor.
 	f.tachoPin.Configure(machine.PinConfig{Mode: machine.PinInputPullup})
 
 	// 回転数取得用のタコメータピンに対する割り込みコールバック設定
+	// Set up an interrupt callback for the tacho pin to count pulses.
+	//
 	// pinFallingを条件にパルスカウントアップ
+	// Increment the pulse count on each falling edge.
 	f.tachoPin.SetInterrupt(machine.PinFalling, func(p machine.Pin) {
 		f.pulseCount.Add(1)
 	})
 	return f
 }
 
-// CalculateRPM  RPMを計算して返却する
+// CalculateRPM RPMを計算して返却する
+// CalculateRPM calculates and returns the fan's speed in RPM.
 func (f *Fan) CalculateRPM() uint32 {
-	count := f.pulseCount.Swap(0) // 計算・取得と同時にカウンタをリフレッシュ
+	// 計算・取得と同時にカウンタをリフレッシュ
+	// Atomically read the count and reset the counter to zero.
+	count := f.pulseCount.Swap(0)
+	// 2 pulses per revolution, 60 seconds per minute.
 	f.rpm = (uint32(count) / 2) * 60
 	return f.rpm
 }
