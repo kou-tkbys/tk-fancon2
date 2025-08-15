@@ -1,91 +1,98 @@
-# Raspberry Pi Picoで動かす！二重反転ファンコントローラー
+[日本語 (Japanese)](./README.ja.md)
 
-## 主な特徴
-* ポテンショメータによるファンの無段階速度調整
-* 2つのファンの回転数をリアルタイムで取得
-* 2つの7セグLEDにそれぞれの回転数を表示
+---
 
-## 必要な部品 (Hardware Requirements)
+# Raspberry Pi Pico Dual Contra-rotating Fan Controller
+
+> **Note:** This document was originally written in Japanese and has been translated into English with the assistance of Gemini.
+
+## Features
+* Stepless fan speed adjustment via a potentiometer.
+* Real-time RPM (Revolutions Per Minute) monitoring for two fans.
+* Display of each fan's RPM on two separate 7-segment LEDs.
+
+## Hardware Requirements
 * Raspberry Pi Pico
-* 二重反転ファン (XXXXXX)
-* HT16K33 2 pics
-* 7segment LED (common cathode) 14Pics
-* 10kΩ ポテンショメータ
+* Dual Contra-rotating Fan (e.g., XXXXXX)
+* 2x HT16K33 I2C 7-segment LED driver boards
+* 14x 7-segment LEDs (common cathode)
+* 1x 10kΩ Potentiometer
 
-## 回路図 (Schematic)
+## Schematic
 TBD
 
-## ライセンス (License)
+## License
 MIT License
 
-## 豆知識
-### PWMクロック周波数設定について
+## Technical Deep Dive
+### About PWM Clock Frequency Settings
 
-マイコンデフォルトの周波数をそのまま利用してもモーター制御自体は特に問題なく可能だが、PWM周波数25kHz近辺に変更する。DCモーターのPWM制御における一般的な推奨周波数が20Khz以上と言われているためである。
+While it's possible to control the motor using the microcontroller's default PWM frequency, this project changes it to approximately 25kHz. This is because the generally recommended frequency for PWM control of DC motors is 20kHz or higher.
 
-* PWM周波数を求める数式
+* **Formula for calculating PWM frequency**
 
-  <p align="center">
-    <img src="./doc/images/mf1.svg" alt="PWM周波数を求める数式">
-  </p>
+    <p align="center">
+      <img src="./doc/images/mf1.svg" alt="Formula for calculating PWM frequency">
+    </p>
 
-* picoのデフォルト周波数を利用した場合
+* **Calculation using the Pico's default frequency**
 
-  <p align="center">
-    <img src="./doc/images/mf2.svg" alt="PICOデフォルト周波数から計算">
-  </p>
+    <p align="center">
+      <img src="./doc/images/mf2.svg" alt="Calculation based on Pico's default frequency">
+    </p>
 
-  結果より、picoでデフォルトのまま利用すると約1.9kHzぐらいのPWM周波数となり、モーター制御はできるかもしれないが、推奨範囲外のため、最適な選択とは言えない。
+    As the result shows, using the Pico's default settings results in a PWM frequency of about 1.9kHz. While this might be able to control the motor, it is outside the recommended range and thus not an optimal choice.
 
-### picoでPWM周波数を約25kHzに変更する
-* tinygo
+### Changing the PWM frequency to ~25kHz on the Pico
+* **With TinyGo**
 
-  ```go
-  pwm.Configure(machine.PWMConfig{Period: 40000})
-  ```
+    ```go
+    // The period is set in nanoseconds.
+    pwm.Configure(machine.PWMConfig{Period: 40000})
+    ```
 
-  PWMConfigに対してPWM周期Raspberry pi picoで25kHzとするために、ナノ秒で指定している。指定した値は以下によって算出している
+    To achieve a 25kHz PWM frequency on the Raspberry Pi Pico, the `Period` for `PWMConfig` is specified in nanoseconds. The value used was calculated as follows:
 
-  <p align="center">
-    <img src="./doc/images/mf3.svg" alt="25kHzの周期ナノ秒を算出">
-  </p>
+    <p align="center">
+      <img src="./doc/images/mf3.svg" alt="Calculation for the period in nanoseconds for 25kHz">
+    </p>
 
-  このように、tinygoを利用すると極めてシンプルに設定可能だ。
+    As you can see, setting this up with TinyGo is extremely simple.
 
-* c++
+* **With C++**
 
-  このプロジェクトをまだplatform ioを利用してcppで書いていた頃の記憶として残しておく。
+    This is kept as a record from when I was initially writing this project in C++ using PlatformIO.
 
-  ```cpp
-    pwm_set_clkdiv(slice_num, 1.220703125); // 算出
-    pwm_set_wrap(slice_num, 4096); // 事前に決めた値
-  ```
+    ```cpp
+    pwm_set_clkdiv(slice_num, 1.220703125); // Calculated value
+    pwm_set_wrap(slice_num, 4096);         // Pre-determined value
+    ```
 
-  c++で実装したときは、クロック分周を指定する必要があったため、クロック分周を算出している。
+    When implementing in C++, it was necessary to specify the clock divider, so I had to calculate it.
 
-  周波数を求める式を変形して分周を求める
+    By rearranging the frequency formula, we can solve for the clock divider:
 
-  <p align="center">
-    <img src="./doc/images/mf4.svg" alt="分周換算">
-  </p>
+    <p align="center">
+      <img src="./doc/images/mf4.svg" alt="Rearranged formula to solve for the clock divider">
+    </p>
 
-  この変換式を利用して実際の値からクロック分周比を求める
+    Using this rearranged formula, the clock divider ratio can be found from the actual values:
 
-  <p align="center">
-    <img src="./doc/images/mf5.svg" alt="分周算出">
-  </p>
+    <p align="center">
+      <img src="./doc/images/mf5.svg" alt="Calculation for the clock divider value">
+    </p>
 
-  求めた値を実際に先のプログラムのように設定することで、25kHz周波数のPWM信号としていた。
+    By setting the calculated value as shown in the program above, a 25kHz PWM signal was achieved.
 
-### 利用するポテンションメーターについて
-* 抵抗値が低すぎる場合
+### About the Potentiometer
+* **If the resistance is too low:**
 
-  無駄な電流が流れ、ポテンションメーターが熱くなる。また、Picoに無駄な負担をかける。
+    Excess current will flow, causing the potentiometer to heat up. This also places an unnecessary load on the Pico.
 
-* 抵抗値が高すぎる場合
+* **If the resistance is too high:**
 
-  高すぎる抵抗（1Mなど）でPicoの内部抵抗（入力インピーダンス）に近づくと、Picoが電圧を正確に読み取れなくなる。
+    If the resistance is too high (e.g., 1MΩ) and approaches the Pico's internal input impedance, the Pico will be unable to accurately read the voltage.
 
-これらの理由から、 5kΩ 〜 50kΩ の範囲のポテンショメータが、このプロジェクトではバランスが良くて理想的である。
+For these reasons, a potentiometer in the range of 5kΩ to 50kΩ is ideal and well-balanced for this project.
 
-その中でも、10kΩ のポテンショメータが最も一般的で、どんな場面でも安心して使える「黄金の抵抗値」として扱われるのでだいたいみんな使ってる。
+Among these, the 10kΩ potentiometer is the most common and is often treated as the "golden standard" that can be used reliably in almost any situation, which is why it's so widely used.
