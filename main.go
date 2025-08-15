@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/kou-tkbys/tk-fancon2/fan"
 	"github.com/kou-tkbys/tk-fancon2/ht16k33"
 )
 
+// Note: tinygo test ./...
 // Note: tinygo build -target=pico -o test.uf2
 func main() {
 	time.Sleep(1 * time.Second)
@@ -19,7 +19,7 @@ func main() {
 
 	// ファン制御の専門家を呼ぶ
 	// Call in the fan control specialist
-	fanController, err := fan.NewFanController()
+	fanController, err := NewPicoFanController()
 	if err != nil {
 		println("Failed to create fan controller:", err.Error())
 		return

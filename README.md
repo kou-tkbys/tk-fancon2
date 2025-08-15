@@ -15,7 +15,7 @@
 * Raspberry Pi Pico
 * Dual Contra-rotating Fan (e.g., XXXXXX)
 * 2x HT16K33 I2C 7-segment LED driver boards
-* 14x 7-segment LEDs (common cathode)
+* 16x 7-segment LEDs (common cathode)
 * 1x 10kΩ Potentiometer
 
 ## Schematic
