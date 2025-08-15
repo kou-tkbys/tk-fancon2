@@ -8,9 +8,9 @@
 ## 必要な部品 (Hardware Requirements)
 * Raspberry Pi Pico
 * 二重反転ファン (XXXXXX)
-* HT16K33 2 pics
-* 7segment LED (common cathode) 14Pics
-* 10kΩ ポテンショメータ
+* HT16K33 2 個
+* 7segment LED (common cathode) 16個
+* 10kΩ ポテンショメータ 1個
 
 ## 回路図 (Schematic)
 TBD
