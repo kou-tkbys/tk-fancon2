@@ -9,8 +9,6 @@
 // It only implements the necessary features to control and display numbers on a 7-segment LED.
 package ht16k33
 
-import "machine"
-
 const (
 	// 1台目のデフォルトアドレス
 	// Default address for the first device
@@ -41,15 +39,21 @@ var font = [10]byte{
 	0b01101111, // 9
 }
 
+// Txインターフェースのみ利用するので分離するためのインターフェースを定義
+// I2CBus is an interface that abstracts the I2C Tx method we need.
+type I2CBus interface {
+	Tx(addr uint16, w, r []byte) error
+}
+
 type Device struct {
-	bus     machine.I2C
+	bus     I2CBus
 	Address uint8
 	// HT16K33の表示用RAMは最大16バイトある
 	// The display RAM of the HT16K33 has a maximum of 16 bytes
 	buffer [16]byte
 }
 
-func New(bus machine.I2C, address uint8) Device {
+func New(bus I2CBus, address uint8) Device {
 	return Device{
 		bus:     bus,
 		Address: address,

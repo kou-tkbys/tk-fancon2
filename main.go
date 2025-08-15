@@ -31,9 +31,9 @@ func main() {
 		SDA: machine.I2C0_SDA_PIN, // GP2
 		SCL: machine.I2C0_SCL_PIN, // GP3
 	})
-	display1 := ht16k33.New(*machine.I2C0, 0x70)
+	display1 := ht16k33.New(machine.I2C0, 0x70)
 	display1.Configure()
-	display2 := ht16k33.New(*machine.I2C0, 0x71)
+	display2 := ht16k33.New(machine.I2C0, 0x71)
 	display2.Configure()
 
 	// --- 主処理 ---
