@@ -8,20 +8,17 @@ import (
 // NOTE: tinygo test ./ht16k33
 // ```-target Select the target you want to use. Leave it empty to compile for the host.````
 
-// machine.I2Cのテスト用のモック
 // This is a mock (a fake object) for testing that pretends to be machine.I2C
 type mockI2C struct {
 	addr uint16
 	data []byte
 }
 
-// Txメソッドを偽装する。本物のI2C通信はせず、送られてきたデータを記録するだけ
 // This fakes the Tx method. It doesn't perform real I2C communication,
 // it just records the data that was supposed to be sent.
 func (m *mockI2C) Tx(addr uint16, w, r []byte) error {
 	m.addr = addr
 	// w (write buffer)の内容をコピーして保存するだけ
-	// Copy and save the contents of w (the write buffer)
 	m.data = make([]byte, len(w))
 	copy(m.data, w)
 	return nil
@@ -72,11 +69,9 @@ func TestSetDigit(t *testing.T) {
 			expectedData := make([]byte, 17)
 			expectedData[0] = 0x00 // アドレスバイト
 			// 該当の桁（2バイトで1桁）に期待値を入れる
-			// Set the expected value at the correct digit position (2 bytes per digit)
 			expectedData[tc.position*2+1] = tc.expectedByte
 
 			if !bytes.Equal(mockBus.data, expectedData) {
-				t.Errorf("FAIL: 送信されたデータが違う\n期待した値: %08b\n実際の値:   %08b", expectedData, mockBus.data)
 				t.Errorf("FAIL: The transmitted data is wrong!\nExpected: %08b\nGot:      %08b", expectedData, mockBus.data)
 			}
 		})
@@ -88,7 +83,6 @@ func TestWriteString(t *testing.T) {
 	mockBus := &mockI2C{}
 	device := New(mockBus, 0x70)
 
-	// "1.2"と表示させてみる
 	// Try to display "1.2"
 	device.WriteString("1.2")
 	device.Display()
@@ -105,7 +99,6 @@ func TestWriteString(t *testing.T) {
 	}
 
 	if !bytes.Equal(mockBus.data, expectedData) {
-		t.Errorf("FAIL: WriteStringで送信されたデータが違う\n期待した値: %08b\n実際の値:   %08b", expectedData, mockBus.data)
 		t.Errorf("FAIL: Data sent by WriteString is wrong!\nExpected: %08b\nGot:      %08b", expectedData, mockBus.data)
 	}
 }

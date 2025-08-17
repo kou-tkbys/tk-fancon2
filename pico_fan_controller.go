@@ -29,7 +29,6 @@ func newPicoTachoCounter(pin machine.Pin) fan.PulseCounter {
 	return p
 }
 
-// raspberry pi picoで制御する二重反転ファンコントローラ
 // PicoFanController manages the dual contra-rotating fan.
 type PicoFanController struct {
 	Fans *fan.DualFan
@@ -59,10 +58,8 @@ func NewPicoFanController() (*PicoFanController, error) {
 	}, nil
 }
 
-// UpdatePWM ポテンショメータの値を読んでPWMを更新する
 // UpdatePWM reads the value from the potentiometer and updates the PWM duty cycle.
 func (fc *PicoFanController) UpdatePWM() {
-	// このメソッドの中だけでPWMを扱うから、ローカル変数で十分
 	// Since PWM is only handled within this method, a local variable is sufficient.
 	pwm := machine.PWM1
 	potValue := fc.adc.Get()
@@ -70,7 +67,6 @@ func (fc *PicoFanController) UpdatePWM() {
 	pwm.Set(1, uint32(potValue))
 }
 
-// GetRPMs 計算したRPM値を返却
 // GetRPMs returns the calculated RPM values for both fans.
 func (fc *PicoFanController) GetRPMs() (uint32, uint32) {
 	return fc.Fans.CalculateRPMs()

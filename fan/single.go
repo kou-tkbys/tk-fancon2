@@ -8,7 +8,6 @@ type PulseCounter interface {
 	ReadAndReset() uint32
 }
 
-// Fan ファン単体の構造体
 // Fan represents a single fan unit.
 type Fan struct {
 	Name    string
@@ -16,7 +15,6 @@ type Fan struct {
 	rpm     uint32
 }
 
-// NewFan nameは自由
 // NewFan creates a new Fan instance. The name can be any string.
 func NewFan(name string, counter PulseCounter) *Fan {
 	return &Fan{
