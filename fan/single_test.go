@@ -1,6 +1,9 @@
 package fan
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 // Note: tinygo test ./fan
 
@@ -58,4 +61,23 @@ func TestFan_CalculateRPM(t *testing.T) {
 			}
 		})
 	}
+}
+
+// ExampleFan_CalculateRPM shows how to use the Fan type to calculate RPM.
+//
+// ExampleFan_CalculateRPMは、Fan型を使ってRPMを計算する方法を示す。
+func ExampleFan_CalculateRPM() {
+	// Create a mock pulse counter that will report 120 pulses.
+	// 120パルスを報告するモックのパルスカウンターを作る。
+	mockCounter := &singleMockPulseCounter{mockCount: 120}
+
+	// Create a new fan with the mock counter.
+	// モックカウンターを使って新しいファンを作る。
+	myFan := NewFan("MyCoolFan", mockCounter)
+
+	// Calculate the RPM.
+	// RPMを計算する。
+	rpm := myFan.CalculateRPM()
+	fmt.Printf("%s RPM: %d\n", myFan.Name, rpm)
+	// Output: MyCoolFan RPM: 3600
 }

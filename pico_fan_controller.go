@@ -1,7 +1,5 @@
 //go:build pico
 
-// pico_fan_controller.go
-
 package main
 
 import (
@@ -11,15 +9,32 @@ import (
 	"github.com/kou-tkbys/tk-fancon2/fan"
 )
 
-// pico専用のパルスカウント実装
+// picoTachoCounter is a Pico-specific implementation for counting pulses.
+// It uses atomic operations to safely increment the count from an
+// interrupt.
+//
+// picoTachoCounterは、Pico専用のパルスカウント実装。
+// 割り込みから安全にカウントを増やすために、アトミック操作を使う。
 type picoTachoCounter struct {
 	pulseCount atomic.Uint32
 }
 
+// ReadAndReset reads the current pulse count and resets it to zero
+// atomically.
+//
+// ReadAndResetは、現在のパルス数を読み取って、アトミックにゼロにリセット
+// する。
 func (p *picoTachoCounter) ReadAndReset() uint32 {
 	return p.pulseCount.Swap(0)
 }
 
+// newPicoTachoCounter creates a new pulse counter for a given pin.
+// It configures the pin as an input with a pull-up and sets up a
+// falling-edge interrupt.
+//
+// newPicoTachoCounterは、指定されたピンのための新しいパルスカウンターを作
+// る。ピンをプルアップ付きの入力として設定し、立ち下がりエッジの割り込み
+// を設定する。
 func newPicoTachoCounter(pin machine.Pin) fan.PulseCounter {
 	p := &picoTachoCounter{}
 	pin.Configure(machine.PinConfig{Mode: machine.PinInputPullup})
@@ -30,11 +45,20 @@ func newPicoTachoCounter(pin machine.Pin) fan.PulseCounter {
 }
 
 // PicoFanController manages the dual contra-rotating fan.
+//
+// PicoFanControllerは、二重反転ファンを管理する。
 type PicoFanController struct {
 	Fans *fan.DualFan
 	adc  machine.ADC
 }
 
+// NewPicoFanController creates and configures a new fan controller.
+// It sets up the ADC for the potentiometer, configures PWM for a 25kHz
+// frequency, and initializes the pulse counters for both fans.
+//
+// NewPicoFanControllerは、新しいファンコントローラーを作成して設定する。
+// ポテンショメータ用のADCを設定し、25kHzの周波数でPWMを設定し、両方のファ
+// ンのパルスカウンターを初期化する。
 func NewPicoFanController() (*PicoFanController, error) {
 	adc := machine.ADC{Pin: machine.ADC0}
 	adc.Configure(machine.ADCConfig{})
@@ -46,7 +70,8 @@ func NewPicoFanController() (*PicoFanController, error) {
 		return nil, err
 	}
 
-	// picoのピン情報を渡しつつカウンタを設定する
+	// Set up counters by passing Pico's pin information.
+	// picoのピン情報を渡しつつカウンタを設定
 	counterF := newPicoTachoCounter(machine.GPIO4)
 	counterR := newPicoTachoCounter(machine.GPIO5)
 
@@ -58,9 +83,16 @@ func NewPicoFanController() (*PicoFanController, error) {
 	}, nil
 }
 
-// UpdatePWM reads the value from the potentiometer and updates the PWM duty cycle.
+// UpdatePWM reads the value from the potentiometer and updates the PWM
+// duty cycle.
+//
+// UpdatePWMは、ポテンショメータから値を読み取り、PWMのデューティサイクル
+// を更新する。
 func (fc *PicoFanController) UpdatePWM() {
-	// Since PWM is only handled within this method, a local variable is sufficient.
+	// Since PWM is only handled within this method, a local variable is
+	// sufficient.
+	//
+	// PWMはこのメソッド内でしか扱わないので、ローカル変数で十分。
 	pwm := machine.PWM1
 	potValue := fc.adc.Get()
 	pwm.Set(0, uint32(potValue))
@@ -68,6 +100,8 @@ func (fc *PicoFanController) UpdatePWM() {
 }
 
 // GetRPMs returns the calculated RPM values for both fans.
+//
+// GetRPMsは、計算された両方のファンのRPM値を返す。
 func (fc *PicoFanController) GetRPMs() (uint32, uint32) {
 	return fc.Fans.CalculateRPMs()
 }

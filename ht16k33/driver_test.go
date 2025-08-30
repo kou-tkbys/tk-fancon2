@@ -1,104 +1,179 @@
+// To run test `tinygo test ./ht16k33/`
+
 package ht16k33
 
 import (
 	"bytes"
+	"fmt"
 	"testing"
 )
 
-// NOTE: tinygo test ./ht16k33
-// ```-target Select the target you want to use. Leave it empty to compile for the host.````
-
-// This is a mock (a fake object) for testing that pretends to be machine.I2C
+// mockI2C is a mock for testing that pretends to be machine.I2C
 type mockI2C struct {
 	addr uint16
 	data []byte
 }
 
-// This fakes the Tx method. It doesn't perform real I2C communication,
-// it just records the data that was supposed to be sent.
+// Tx fakes the I2C transaction, recording the data that was supposed to be sent.
 func (m *mockI2C) Tx(addr uint16, w, r []byte) error {
 	m.addr = addr
-	// w (write buffer)の内容をコピーして保存するだけ
 	m.data = make([]byte, len(w))
 	copy(m.data, w)
 	return nil
 }
 
-// SetDigit test
+// TestSetDigit verifies that setting a single digit correctly modifies the buffer.
 func TestSetDigit(t *testing.T) {
-	// table of test cases
 	testCases := []struct {
-		name         string // テストケースの名前
-		position     int    // 入力：桁
-		num          byte   // 入力：数字
-		dot          bool   // 入力：ドットの有無
-		expectedByte byte   // 期待するバッファの値
+		name           string
+		display        int
+		position       int
+		num            byte
+		dot            bool
+		expectedBuffer [16]byte
 	}{
 		{
-			name:         "Digit 0, Number 8 with dot",
-			position:     0,
-			num:          8,
-			dot:          true,
-			expectedByte: 0b11111111, // "8" + dot
+			name:     "Display 0, Position 0, Number 8, with dot",
+			display:  0,
+			position: 0,
+			num:      8,
+			dot:      true,
+			// For number 8 (all segments on) at position 0, bit 0 should be set for rows 0-6.
+			// For dot, bit 0 should be set for row 7.
+			expectedBuffer: [16]byte{
+				1 << 0, 1 << 0, 1 << 0, 1 << 0, 1 << 0, 1 << 0, 1 << 0, 1 << 0,
+				0, 0, 0, 0, 0, 0, 0, 0,
+			},
 		},
 		{
-			name:         "Digit 1, Number 2 without dot",
-			position:     1,
-			num:          2,
-			dot:          false,
-			expectedByte: 0b01011011, // "2"
+			name:     "Display 1, Position 7, Number 1, no dot",
+			display:  1,
+			position: 7,
+			num:      1,
+			dot:      false,
+			// For number 1 (segments b, c) at position 7, bit 7 should be set for rows 8+1 and 8+2.
+			expectedBuffer: [16]byte{
+				0, 0, 0, 0, 0, 0, 0, 0,
+				0, 1 << 7, 1 << 7, 0, 0, 0, 0, 0,
+			},
 		},
 		{
-			name:         "Digit 7, Number 9 with dot",
-			position:     7,
-			num:          9,
-			dot:          true,
-			expectedByte: 0b11101111, // "9" + dot
+			name:     "Set blank on Display 0, Position 3",
+			display:  0,
+			position: 3,
+			num:      blankPatternIndex, // blank
+			dot:      false,
+			// Should result in an all-zero buffer as it clears the position.
+			expectedBuffer: [16]byte{},
 		},
 	}
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			mockBus := &mockI2C{}
-			device := New(mockBus, 0x70)
+			device := New(mockBus, 0x70) // Creates a device with a zeroed buffer
 
-			device.SetDigit(tc.position, tc.num, tc.dot)
-			device.Display()
+			device.SetDigit(tc.display, tc.position, tc.num, tc.dot)
 
-			// Create the expected full buffer
-			expectedData := make([]byte, 17)
-			expectedData[0] = 0x00 // アドレスバイト
-			// 該当の桁（2バイトで1桁）に期待値を入れる
-			expectedData[tc.position*2+1] = tc.expectedByte
-
-			if !bytes.Equal(mockBus.data, expectedData) {
-				t.Errorf("FAIL: The transmitted data is wrong!\nExpected: %08b\nGot:      %08b", expectedData, mockBus.data)
+			if !bytes.Equal(device.buffer[:], tc.expectedBuffer[:]) {
+				t.Errorf("FAIL: Buffer content is wrong!\nExpected: %08b\nGot:      %08b", tc.expectedBuffer, device.buffer)
 			}
 		})
 	}
 }
 
-// WriteString test
+// TestWriteString verifies that writing a string correctly populates the buffer.
 func TestWriteString(t *testing.T) {
 	mockBus := &mockI2C{}
 	device := New(mockBus, 0x70)
 
-	// Try to display "1.2"
-	device.WriteString("1.2")
+	// Write "1." to display 0 and "2" to display 1
+	device.WriteString(0, "1.")
+	device.WriteString(1, "2")
+
+	expectedBuffer := [16]byte{
+		0,      // D0, seg a
+		1 << 0, // D0, seg b (from "1")
+		1 << 0, // D0, seg c (from "1")
+		0,      // D0, seg d
+		0,      // D0, seg e
+		0,      // D0, seg f
+		0,      // D0, seg g
+		1 << 0, // D0, dot (from "1.")
+		1 << 0, // D1, seg a (from "2")
+		1 << 0, // D1, seg b (from "2")
+		0,      // D1, seg c
+		1 << 0, // D1, seg d (from "2")
+		1 << 0, // D1, seg e (from "2")
+		0,      // D1, seg f
+		1 << 0, // D1, seg g (from "2")
+		0,      // D1, dot
+	}
+
+	if !bytes.Equal(device.buffer[:], expectedBuffer[:]) {
+		t.Errorf("FAIL: Buffer content after WriteString is wrong!\nExpected: %08b\nGot:      %08b", expectedBuffer, device.buffer)
+	}
+
+	// Now, test that Display() sends the correct data over I2C
 	device.Display()
 
-	// 期待値
-	expectedData := []byte{
-		0x00,       // 先頭のアドレスバイト
-		0b10000110, // "1" + dot
-		0x00,
-		0b01011011, // "2"
-		0x00,       // ↓ここから後ろ13バイトは空のはず
-		0x00, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	expectedI2CData := append([]byte{0x00}, expectedBuffer[:]...)
+	if !bytes.Equal(mockBus.data, expectedI2CData) {
+		t.Errorf("FAIL: Data sent by Display() is wrong!\nExpected: %08b\nGot:      %08b", expectedI2CData, mockBus.data)
+	}
+}
+
+// TestClearDisplay verifies that a single display can be cleared.
+func TestClearDisplay(t *testing.T) {
+	mockBus := &mockI2C{}
+	device := New(mockBus, 0x70)
+
+	// Write something to both displays first
+	device.WriteString(0, "88")
+	device.WriteString(1, "99")
+
+	// Now clear display 0
+	device.ClearDisplay(0)
+
+	// Expected buffer state: Display 0 is clear, Display 1 still shows "99".
+	var expectedBuffer [16]byte
+	// Calculate "99" on display 1 (font[9] = 0b01101111)
+	pattern9 := font[9]
+	for seg := 0; seg < 7; seg++ {
+		if (pattern9>>seg)&1 == 1 {
+			// Set bit 0 (for first digit "9") and bit 1 (for second digit "9")
+			expectedBuffer[8+seg] = (1 << 0) | (1 << 1)
+		}
 	}
 
-	if !bytes.Equal(mockBus.data, expectedData) {
-		t.Errorf("FAIL: Data sent by WriteString is wrong!\nExpected: %08b\nGot:      %08b", expectedData, mockBus.data)
+	if !bytes.Equal(device.buffer[:], expectedBuffer[:]) {
+		t.Errorf("FAIL: Buffer content after ClearDisplay is wrong!\nExpected: %08b\nGot:      %08b", expectedBuffer, device.buffer)
 	}
+}
+
+// ExampleDevice_WriteString shows how to use the Device to write strings
+// to both displays.
+//
+// ExampleDevice_WriteStringは、Deviceを使って両方のディスプレイに文字列を
+// 書き込む方法を示す。
+func ExampleDevice_WriteString() {
+	// Create a mock I2C bus for demonstration.
+	// In a real application, this would be machine.I2C0.
+	// デモ用にモックのI2Cバスを作る。
+	// 実際のアプリケーションでは、これはmachine.I2C0になる。
+	mockBus := &mockI2C{}
+
+	// Create and configure the display driver.
+	// ディスプレイドライバを作成して設定する。
+	display := New(mockBus, 0x70)
+	display.Configure()
+
+	// Write different strings to each 8-digit display.
+	// それぞれの8桁ディスプレイに、違う文字列を書き込む。
+	display.WriteString(0, "3600")
+	display.WriteString(1, "1800")
+	display.Display()
+
+	fmt.Println("Wrote '3600' to display 0 and '1800' to display 1.")
+	// Output: Wrote '3600' to display 0 and '1800' to display 1.
 }
