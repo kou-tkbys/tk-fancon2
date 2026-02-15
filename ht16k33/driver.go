@@ -191,28 +191,22 @@ func (d *Device) WriteString(display int, s string) {
 	d.ClearDisplay(display)
 
 	digitPos := 0
-	i := 0
-	for i < len(s) && digitPos < MaxDigitsPerDisplay {
-		char := s[i]
-
+	runes := []rune(s) // runeのスライスに変換して、マルチバイト文字にも対応する
+	for i := 0; i < len(runes) && digitPos < MaxDigitsPerDisplay; i++ {
+		char := runes[i]
 		if char >= '0' && char <= '9' {
 			num := byte(char - '0')
 			dot := false
 			// Look ahead for a dot
-			if i+1 < len(s) && s[i+1] == '.' {
+			if i+1 < len(runes) && runes[i+1] == '.' {
 				dot = true
+				i++ // ドットを処理したので、次の文字はスキップ
 			}
 
 			d.SetDigit(display, digitPos, num, dot)
 			digitPos++
-			i++
-
-			if dot {
-				i++ // Skip the dot we just processed
-			}
-		} else {
-			i++ // Skip non-digit characters
 		}
+		// 数字でもドットでもない文字は、ここでは単純に無視
 	}
 }
 

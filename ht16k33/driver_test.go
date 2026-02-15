@@ -92,16 +92,16 @@ func TestWriteString(t *testing.T) {
 	device.WriteString(1, "2")
 
 	expectedBuffer := [16]byte{
-		0,      // D0, seg a
-		1 << 0, // D0, seg b (from "1")
-		1 << 0, // D0, seg c (from "1")
-		0,      // D0, seg d
-		0,      // D0, seg e
-		0,      // D0, seg f
-		0,      // D0, seg g
-		1 << 0, // D0, dot (from "1.")
-		1 << 0, // D1, seg a (from "2")
-		1 << 0, // D1, seg b (from "2")
+		0,      // D0 P0, seg a
+		1 << 0, // D0 P0, seg b (from "1")
+		1 << 0, // D0 P0, seg c (from "1")
+		0,      // D0 P0, seg d
+		0,      // D0 P0, seg e
+		0,      // D0 P0, seg f
+		0,      // D0 P0, seg g
+		1 << 0, // D0 P0, dot (from "1.")
+		1 << 0, // D1 P0, seg a (from "2")
+		1 << 0, // D1 P0, seg b (from "2")
 		0,      // D1, seg c
 		1 << 0, // D1, seg d (from "2")
 		1 << 0, // D1, seg e (from "2")
