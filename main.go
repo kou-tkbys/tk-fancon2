@@ -1,9 +1,11 @@
 package main
 
 import (
-	// "strconv"
+	"machine"
+	"strconv"
 	"time"
-	// "github.com/kou-tkbys/tk-fancon2/ht16k33"
+
+	"github.com/kou-tkbys/tk-fancon2/ht16k33"
 )
 
 // Note: tinygo test ./...
@@ -22,56 +24,67 @@ const (
 // ディスプレイを初期化し、無限ループに入ってファンの速度を更新、RPMの表示
 // などを行う
 func main() {
-	time.Sleep(1 * time.Second)
+	led := machine.LED
+	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
-	// --- Prepare components ---
-	// --- 準備 ---
+	// 1. 起動確認：ゆっくり3回点滅
+	// これで「プログラムが走り出した」ことはわかるぞ。
+	for i := 0; i < 3; i++ {
+		led.High()
+		time.Sleep(300 * time.Millisecond)
+		led.Low()
+		time.Sleep(300 * time.Millisecond)
+	}
 
-	// Call in the fan control specialist
-	// ファンの制御インスタンス生成
+	// 2. ファンコントローラーの初期化
+	// ここで死ぬなら、配線（特にGPIO周り）か初期化コードに問題があるぞ。
 	fanController, err := NewFanController()
 	if err != nil {
-		println("Failed to create fan controller:", err.Error())
-		return
+		// 初期化失敗なら高速点滅（SOS）じゃ！
+		for {
+			led.Set(!led.Get())
+			time.Sleep(50 * time.Millisecond)
+		}
 	}
+
+	// 3. 初期化成功：点灯しっぱなしで1秒待機
+	led.High()
+	time.Sleep(1 * time.Second)
+	led.Low()
+
+	// シリアルモニタの準備ができたら、高らかに宣言するのじゃ！
+	println("Typhoon system, online. Starting application.")
 
 	// Call in the display specialist
 	// ディスプレイ制御インスタンス生成
-	// i2c := SetupI2C()
+	i2c := SetupI2C()
 
 	// Initialize the dual display controlled by a single HT16K33 IC at address 0x70.
 	// 2つのディスプレイを1つのIC(0x70)で制御
-	// dualDisplay := ht16k33.New(i2c, 0x70)
-	// dualDisplay.Configure()
+	dualDisplay := ht16k33.New(i2c, 0x70)
+	dualDisplay.Configure()
 
 	// --- Main processing loop ---
-	// --- メインの処理ループ ---
 	rpmTicker := time.NewTicker(rpmUpdateInterval)
 	pwmTicker := time.NewTicker(pwmUpdateInterval)
-	println(fanController.Fans.Name, " system, online. Starting application.")
 
 	for {
 		select {
-		// Process triggered by a 1-second timer.
-		// 1秒ごとのタイマー処理
-		case <-rpmTicker.C: // This case is for slow updates (display).
-			// Get fan RPMs.
-			// ファンのRPMを取得
+		case <-rpmTicker.C:
 			rpm1, rpm2 := fanController.GetRPMs()
 			println("Fan1:", rpm1, " Fan2:", rpm2)
 
 			// Write the RPMs to displays 0 and 1 on the single device.
 			// 1つのデバイスに、ディスプレイ0と1を指定して書き込む
-			// dualDisplay.WriteString(0, strconv.Itoa(int(rpm1)))
-			// dualDisplay.WriteString(1, strconv.Itoa(int(rpm2)))
+			dualDisplay.WriteString(0, strconv.Itoa(int(rpm1)))
+			dualDisplay.WriteString(1, strconv.Itoa(int(rpm2)))
 			// Transfer the buffer to the display driver all at once.
 			// 最後にまとめて転送！
-			// dualDisplay.Display()
+			dualDisplay.Display()
 
-		case <-pwmTicker.C: // This case is for fast updates (potentiometer).
-			// Control the fan rotation speed.
-			// ファンの回転速度を制御
+		case <-pwmTicker.C:
 			fanController.UpdatePWM()
+			led.Set(!led.Get())
 		}
 	}
 }

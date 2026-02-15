@@ -60,12 +60,30 @@ type PicoFanController struct {
 // ポテンショメータ用のADCを設定し、25kHzの周波数でPWMを設定し、両方のファ
 // ンのパルスカウンターを初期化する。
 func NewFanController() (*PicoFanController, error) {
-	adc := machine.ADC{Pin: machine.ADC0}
+	// Initialize the ADC peripheral. This is required on RP2040 to enable the ADC block.
+	// RP2040では、ADCを使う前に必ずこれを呼んで、ADCモジュールの電源を入れる必要があるのじゃ！
+	machine.InitADC()
+
+	// Use GPIO26 explicitly for ADC0 to avoid confusion or conflicts.
+	// machine.ADC0 ではなく、物理的なピンである machine.GPIO26 を明示的に指定するのじゃ！
+	adc := machine.ADC{Pin: machine.GPIO26}
 	adc.Configure(machine.ADCConfig{})
 
 	pwm := machine.PWM1
 	// For 25kHz
 	err := pwm.Configure(machine.PWMConfig{Period: 40000})
+	if err != nil {
+		return nil, err
+	}
+
+	// Configure the pins for PWM output.
+	// これを忘れておった！GPIO2とGPIO3をPWMモードに切り替える必要があるのじゃ。
+	// これを呼ばないと、ピンから信号が出ず、ファンは信号断と判断してフル回転してしまうぞ。
+	_, err = pwm.Channel(machine.GPIO2) // PWM1 Channel A
+	if err != nil {
+		return nil, err
+	}
+	_, err = pwm.Channel(machine.GPIO3) // PWM1 Channel B
 	if err != nil {
 		return nil, err
 	}
@@ -94,9 +112,25 @@ func (fc *PicoFanController) UpdatePWM() {
 	//
 	// PWMはこのメソッド内でしか扱わないので、ローカル変数で十分。
 	pwm := machine.PWM1
+
 	potValue := fc.adc.Get()
-	pwm.Set(0, uint32(potValue))
-	pwm.Set(1, uint32(potValue))
+
+	// Software deadzone: if value is low enough, treat as zero.
+	// ソフトウェアデッドゾーン：値が十分に低ければ、ゼロとして扱うのじゃ。
+	if potValue < 2000 { // ~3% of 65535
+		potValue = 0
+	}
+
+	// Scaling: ADC (0-65535) -> PWM Period (0-40000)
+	// Use a squared curve for finer control at low speeds.
+	// リニアだと急激すぎるから、2乗カーブを使って低速域をマイルドにするのじゃ！
+	// Formula: (potValue^2 * 40000) / 65535^2
+	// uint64を使わないと計算途中で桁あふれするから注意じゃよ。
+	duty := uint32((uint64(potValue) * uint64(potValue) * 40000) / (65535 * 65535))
+	println("Duty:", duty)
+
+	pwm.Set(0, duty)
+	pwm.Set(1, duty)
 }
 
 // GetRPMs returns the calculated RPM values for both fans.
