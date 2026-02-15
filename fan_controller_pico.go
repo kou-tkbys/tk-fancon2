@@ -52,14 +52,14 @@ type PicoFanController struct {
 	adc  machine.ADC
 }
 
-// NewPicoFanController creates and configures a new fan controller.
+// NewFanController creates and configures a new fan controller.
 // It sets up the ADC for the potentiometer, configures PWM for a 25kHz
 // frequency, and initializes the pulse counters for both fans.
 //
-// NewPicoFanControllerは、新しいファンコントローラーを作成して設定する。
+// NewFanControllerは、新しいファンコントローラーを作成して設定する。
 // ポテンショメータ用のADCを設定し、25kHzの周波数でPWMを設定し、両方のファ
 // ンのパルスカウンターを初期化する。
-func NewPicoFanController() (*PicoFanController, error) {
+func NewFanController() (*PicoFanController, error) {
 	adc := machine.ADC{Pin: machine.ADC0}
 	adc.Configure(machine.ADCConfig{})
 
@@ -104,4 +104,15 @@ func (fc *PicoFanController) UpdatePWM() {
 // GetRPMsは、計算された両方のファンのRPM値を返す。
 func (fc *PicoFanController) GetRPMs() (uint32, uint32) {
 	return fc.Fans.CalculateRPMs()
+}
+
+// SetupI2C configures the I2C bus for Pico.
+//
+// SetupI2Cは、Pico用のI2Cバスを設定する。
+func SetupI2C() *machine.I2C {
+	machine.I2C0.Configure(machine.I2CConfig{
+		SDA: machine.GPIO0, // GP0 (I2C0 SDA)
+		SCL: machine.GPIO1, // GP1 (I2C0 SCL)
+	})
+	return machine.I2C0
 }
